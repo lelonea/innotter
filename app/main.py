@@ -18,4 +18,4 @@ async def root():
 async def say_hello(name: str):
     return {"message": f"Hello {name}"}
 
-models.Base.metadata.create_all(engine)
+# models.Base.metadata.create_all(engine)

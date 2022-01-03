@@ -7,9 +7,13 @@ name = "pypi"
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 sqlalchemy = "*"
-psycopg2-binary = "*"
 alembic = "*"
 python-dotenv = "*"
+passlib = "*"
+bcrypt = "*"
+pydantic = {extras = ["email"], version = "*"}
+asyncpg = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 

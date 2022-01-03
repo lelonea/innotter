@@ -1,15 +1,15 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 
 class UserBase(BaseModel):
     username: str
-    email: str
+    email: EmailStr
     password: str
 
 
 class UserDisplay(BaseModel):
     username: str
-    email: str
+    email: EmailStr
 
-    class Config():
+    class Config:
         orm_mode = True
