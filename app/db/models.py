@@ -3,7 +3,7 @@ from sqlalchemy import Column, Integer, String
 from app.db.database import Base
 
 
-class DbUser(Base):
+class UserDB(Base):
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True, index=True)

@@ -1,15 +1,16 @@
 from sqlalchemy.orm.session import Session
 
-from app.routers.schemas import UserBase
+from app.schemas.schemas import UserBase
 from app.db.models import DbUser
 from app.db.hashing import Hash
 
 
-def create_new_user(db: Session, request: UserBase):
+def create_new_user(db: Session, api_input: UserBase):
+    """Saves users data to db"""
     new_user = DbUser(
-        username=request.username,
-        email=request.email,
-        password=Hash.bcrypt(request.password)
+        username=api_input.username,
+        email=api_input.email,
+        password=Hash.bcrypt(api_input.password)
     )
     db.add(new_user)
     db.commit()

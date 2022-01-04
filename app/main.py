@@ -1,8 +1,6 @@
 from fastapi import FastAPI
 
 from app.routers import user
-from app.db import models
-from app.db.database import engine
 
 
 app = FastAPI()
@@ -17,5 +15,3 @@ async def root():
 @app.get("/hello/{name}")
 async def say_hello(name: str):
     return {"message": f"Hello {name}"}
-
-# models.Base.metadata.create_all(engine)

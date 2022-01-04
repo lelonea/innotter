@@ -7,9 +7,17 @@ from app.db import Base
 
 from alembic import context
 
+import os
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
+
+section = config.config_ini_section
+config.set_section_option(section, "POSTGRES_USER", os.environ.get("POSTGRES_USER"))
+config.set_section_option(section, "POSTGRES_PASSWORD", os.environ.get("POSTGRES_PASSWORD"))
+config.set_section_option(section, "POSTGRES_DB", os.environ.get("POSTGRES_DB"))
+
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
