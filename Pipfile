@@ -6,6 +6,17 @@ name = "pypi"
 [packages]
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
+sqlalchemy = "*"
+alembic = "*"
+python-dotenv = "*"
+passlib = "*"
+bcrypt = "*"
+pydantic = {extras = ["email"], version = "*"}
+asyncpg = "*"
+psycopg2-binary = "*"
+redis = "*"
+celery = "*"
+flower = "*"
 
 [dev-packages]
 
