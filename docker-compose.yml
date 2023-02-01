@@ -1,13 +1,45 @@
-version: '3'
+version: '3.8'
 
 services:
   app:
+    container_name: fastapi-app
     build:
       context: .
       dockerfile: Dockerfile
+      target: base
+    command: ["bash", "entrypoint.sh"]
     ports:
       - "8000:8000"
     env_file:
       - .env
+    depends_on:
+      db:
+        condition: service_healthy
     volumes:
       - .:/app
+
+  db:
+    container_name: fastapi-mysql-db
+    image: mysql:8.0.30
+    ports:
+      - "3307:3306"
+    build:
+      dockerfile: Dockerfile
+      target: mysql_migration
+      context: .
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_USER: ${DB_USERNAME}
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+      interval: 20s
+      timeout: 5s
+    volumes:
+      - db_data:/var/lib/mysql
+
+
+volumes:
+  db_data: { }
