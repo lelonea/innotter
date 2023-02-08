@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
       target: base
-    command: ["bash", "entrypoint.sh"]
+    command: ["sh", "/entrypoint.sh"]
     ports:
       - "8000:8000"
     env_file:
@@ -16,7 +16,7 @@ services:
       db:
         condition: service_healthy
     volumes:
-      - .:/app
+      - ./src:/app
 
   db:
     container_name: fastapi-mysql-db

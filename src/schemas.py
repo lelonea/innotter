@@ -40,7 +40,26 @@ class BlogResponseModel(BaseModel):
 
 
 class UserSchema(BaseModel):
-    id: int
     username: str
     email: str
     password: str
+
+
+class UserDisplaySchema(BaseModel):
+    id: int
+    username: str
+    email: str
+
+    class Config:
+        orm_mode = True
+
+
+class UserUpdateSchema(BaseModel):
+    username: Optional[str]
+    email: Optional[str]
+    password: Optional[str]
+
+    class Config:
+        orm_mode = True
+
+

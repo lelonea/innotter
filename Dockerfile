@@ -9,9 +9,7 @@ WORKDIR /app
 COPY requirements.txt /requirements.txt
 RUN pip3 install --no-cache-dir -r /requirements.txt
 COPY . /app/
-#RUN chmod +x entrypoint.sh
-#
-#ENTRYPOINT ["sh","./entrypoint.sh"]
+COPY entrypoint.sh /entrypoint.sh
 
 FROM mysql:8.0.21 as mysql_migration
 
