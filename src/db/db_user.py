@@ -51,3 +51,10 @@ def delete_user(db: Session, user_id: int):
     db.delete(user)
     db.commit()
     return {"message": "User deleted successfully"}
+
+
+def get_user_by_username(db: Session, username: str):
+    user = db.query(DbUser).filter(DbUser.username == username).first()
+    if not user:
+        raise NotFoundException(f'User with username {username} not found')
+    return user

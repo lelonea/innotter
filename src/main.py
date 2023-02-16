@@ -1,15 +1,24 @@
 from fastapi import FastAPI, status
+from fastapi.staticfiles import StaticFiles
 from starlette.responses import JSONResponse
 
 from routers.blog_get import router as router_get
 from routers.blog_post import router as router_post
-from routers.user import router as router_user_post
+from routers.user import router as router_user
+from routers.article import router as router_article
+from auth.aunthentication import router as auth_router
+from routers.file_routers import router as file_router
 from custom_exceptions import NotFoundException, DuplicationException
 
 app = FastAPI()
 app.include_router(router_get)
 app.include_router(router_post)
-app.include_router(router_user_post)
+app.include_router(router_user)
+app.include_router(router_article)
+app.include_router(auth_router)
+app.include_router(file_router)
+
+app.mount('/files', StaticFiles(directory="files"), name='files')
 
 
 @app.exception_handler(Exception)
