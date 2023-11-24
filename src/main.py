@@ -1,11 +1,10 @@
 from fastapi import FastAPI, status
 from starlette.responses import JSONResponse
 
-from src.db import models
-from src.db.database import engine
-from src.routers.blog_get import router as router_get, NotFoundException
-from src.routers.blog_post import router as router_post
-from src.routers.user_post import router as router_user_post
+from routers.blog_get import router as router_get
+from routers.blog_post import router as router_post
+from routers.user import router as router_user_post
+from custom_exceptions import NotFoundException, DuplicationException
 
 app = FastAPI()
 app.include_router(router_get)
@@ -36,9 +35,18 @@ def not_found_exception_handler(_, exc: NotFoundException):
     )
 
 
+@app.exception_handler(DuplicationException)
+def not_found_exception_handler(_, exc: DuplicationException):
+    return JSONResponse(
+        status_code=status.HTTP_409_CONFLICT,
+        content={
+            "code": status.HTTP_409_CONFLICT,
+            "is_error": True,
+            "message": exc.message
+        },
+    )
+
+
 @app.get('/hello', tags=["utils"])
 def index():
     return {'message': 'Hello world!'}
-
-
-models.Base.metadata.create_all(engine)

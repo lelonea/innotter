@@ -6,10 +6,6 @@ from starlette.status import HTTP_404_NOT_FOUND
 
 router = APIRouter(prefix="/blog", tags=["blog"])
 
-class NotFoundException(Exception):
-    def __init__(self, message):
-        self.message = message
-
 
 class BlogType(str, Enum):
     short = 'short'

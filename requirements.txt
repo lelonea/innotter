@@ -4,3 +4,6 @@ pydantic==1.10.0
 SQLAlchemy==1.4.44
 PyMySQL==1.0.2
 cryptography==2.8
+alembic==1.7.1
+passlib==1.7.4
+bcrypt==3.1.7

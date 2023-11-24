@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import APIRouter, Query, Path, Request
 
-from src.schemas import BlogModel, BlogResponseModel, UpdateBlogModel, BlogCategoryEnum
+from schemas import BlogModel, BlogResponseModel, UpdateBlogModel
 
 router = APIRouter(
     prefix='/blog',
@@ -35,13 +35,6 @@ def create_comment(blog: BlogModel, blog_id: int = Path(None,
                              comment_id=comment_id,
                              versions_list=version)
 
-    #     {
-    #     'blog': blog,
-    #     'id': blog_id,
-    #     'comment_title': comment_title,
-    #     'comment_id': comment_id,
-    #     'versions_list': version
-    # }
 
 @router.patch('/update/{blog_id}')
 def update_blog(blog_id: int, blog: UpdateBlogModel):
